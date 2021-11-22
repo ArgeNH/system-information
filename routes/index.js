@@ -1,9 +1,7 @@
 const { Router } = require('express');
-const Person = require('../models/person');
 const { createPerson, getPerson, updatePerson } = require('../controllers/person');
 
 const router = Router();
-
 
 router.get('/', (req, res) => {
     res.render('index', { messages: req.flash('register')[0] });

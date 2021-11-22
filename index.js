@@ -20,9 +20,8 @@ app.use(session({
     secret: 'arge',
     resave: false,
     saveUninitialized: false
-}))
+}));
 app.use(flash());
-
 
 app.use('/', route);
 
