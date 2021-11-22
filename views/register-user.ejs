@@ -1,19 +1,60 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Asobreva</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-</head>
-
-<body style="background-color: beige;">
+<%- include('./templates/header.ejs') %>
     <%- include('./templates/navbar')%>
-    <div class="container">
-        <h1>Registrar Usuario</h1>
-    </div>
-    <%- include('./templates/footer')%>
-</body>
+        <div class="container">
+            <h2 class="title is-2">Registrar Usuario</h2>
+            <h2 class="subtitle">Registrar usuarios que no se encuentran dentro de la base de datos</h2>
 
-</html>
+            <% if (messages) { %>
+                <article class="message is-danger">
+                    <div class="message-body">
+                        <%= messages %>
+                    </div>
+                </article>
+            <% } %>
+            
+            <div class="columns is-desktop">
+
+                <div class="column is-half is-offset-one-quarter">
+
+                    <form action="/add" method="POST">
+                        <div class="field">
+                            <label class="label">Cedula</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="ej. 105212145" name="idCard">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Nombres</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="ej. Arge Darley" name="name">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Apellidos</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="ej. Nino Viancha" name="lastname">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control">
+                                <input class="input" type="email" placeholder="ej. arge.nino@gmail.com" name="email">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control is-half">
+                                <button class="button is-primary" type="submit">
+                                    Registrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./templates/footer')%>

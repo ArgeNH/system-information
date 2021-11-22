@@ -3,6 +3,8 @@ const path = require('path');
 const dotenv = require('dotenv');
 const route = require('./routes/index');
 const db = require('./database/config');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 dotenv.config();
 
@@ -14,6 +16,13 @@ app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+app.use(session({
+    secret: 'arge',
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(flash());
+
 
 app.use('/', route);
 
