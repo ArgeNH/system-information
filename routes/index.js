@@ -1,5 +1,10 @@
 const { Router } = require('express');
-const { createPerson, getPerson, updatePerson } = require('../controllers/person');
+const {
+    createPerson,
+    getPerson,
+    updatePerson,
+    createProduction
+} = require('../controllers/person');
 
 const router = Router();
 
@@ -12,11 +17,13 @@ router.get('/register-user', (req, res) => {
 });
 
 router.get('/register-production', (req, res) => {
-    res.render('register-production', { register: req.flash('product')[0] });
+    res.render('register-production', { register: req.flash('product')[0], production: req.flash('register-production')[0] });
 });
 
 router.post('/add', createPerson);
 
-router.post('/add-production', getPerson);
+router.post('/find', getPerson);
+
+router.post('/add-production', createProduction);
 
 module.exports = router;

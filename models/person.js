@@ -22,7 +22,7 @@ const PersonSchema = new Schema({
     production : [
         {
             type: Schema.Types.ObjectId,
-            ref: 'product'
+            ref: 'productions'
         }
     ]
 });

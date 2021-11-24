@@ -8,7 +8,7 @@
                             <h1 class="title">
                                 Registro de Produccion de breva
                             </h1>
-                            <form action="/add-production" method="POST">
+                            <form action="/find" method="POST">
 
                                 <div class="field">
                                     <label class="label">Cedula del propietario</label>
@@ -26,34 +26,41 @@
                             </form>
                             <br>
 
-                            <% if (register) { %>
+                            <% if (production) { %>
                                 <article class="message is-success">
                                     <div class="message-body">
-                                        <%= register %>
+                                        <%= production %>
                                     </div>
-                                </article>
+                            <% } %>
 
-                                <form action="/add-p" method="POST">
-                                    <div class="field">
-                                        <label class="label">Kilos</label>
-                                        <div class="control">
-                                            <input class="input" type="number" name="weight" placeholder="ej. 30"
-                                                required>
-                                        </div>
-                                    </div>
-                                    <div class="field">
-                                        <label class="label">Fecha</label>
-                                        <div class="control">
-                                            <input class="input" type="date" name="date" required>
-                                        </div>
-                                    </div>
-                                    <div class="field">
-                                        <div class="control">
-                                            <button class="button is-link">Registrar Produccion</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <% } %>
+                                    <% if (register) { %>
+                                        <article class="message is-success">
+                                            <div class="message-body">
+                                                <%= register %>
+                                            </div>
+                                        </article>
+
+                                        <form action="/add-production" method="POST">
+                                            <div class="field">
+                                                <label class="label">Kilos</label>
+                                                <div class="control">
+                                                    <input class="input" type="number" name="weight"
+                                                        placeholder="ej. 30" required>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <label class="label">Fecha</label>
+                                                <div class="control">
+                                                    <input class="input" type="date" name="date" required>
+                                                </div>
+                                            </div>
+                                            <div class="field">
+                                                <div class="control">
+                                                    <button class="button is-link">Registrar Produccion</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <% } %>
                         </div>
                     </div>
                 </div>
