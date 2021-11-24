@@ -8,13 +8,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/register-user', (req, res) => {
-    res.render('register-user', { messages: req.flash('unregister')[0] });
+    res.render('register-user', { messages: req.flash('unregister')[0], register: req.flash('fregister')[0] });
 });
 
 router.get('/register-production', (req, res) => {
-    res.render('register-production');
+    res.render('register-production', { register: req.flash('product')[0] });
 });
 
 router.post('/add', createPerson);
+
+router.post('/add-production', getPerson);
 
 module.exports = router;

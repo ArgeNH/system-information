@@ -1,6 +1,4 @@
 const { response } = require('express');
-const Swal = require('sweetalert2');
-
 const Person = require('../models/person');
 
 const createPerson = async (req, res = response) => {
@@ -16,14 +14,6 @@ const createPerson = async (req, res = response) => {
             await person.save();
             req.flash('register', `La persona  con la cedula ${idCard} se ha registrado con exito`);
             res.redirect('/');
-            /* return res.status(200).json({
-                success: true,
-                uid: person.uid,
-                idCard: person.idCard,
-                name: person.name,
-                lastname: person.lastname,
-                email: person.email
-            }); */
         }
     } catch (e) {
         console.log(e);
@@ -39,15 +29,15 @@ const getPerson = async (req, res = response) => {
     let person = await Person.findOne({ idCard });
 
     if (person) {
-        return res.status(200).json({
-            success: true,
-            person
-        });
+        //Registrado
+        req.flash('product', `Registre la produccion de ${person.name} ${person.lastname} \n
+        identificado con cedula ${person.idCard}`);
+        res.redirect('/register-production');
     } else {
-        return res.status(400).json({
-            success: false,
-            message: 'Usuario no registrado'
-        })
+        // No registrado
+        req.flash('fregister', `La persona  con la cedula ${idCard} NO esta registrada, debe registrara para poder 
+        anadir la produccion`);
+        res.redirect('/register-user');
     }
 };
 

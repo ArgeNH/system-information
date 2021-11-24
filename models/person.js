@@ -18,7 +18,13 @@ const PersonSchema = new Schema({
         type: String,
         require: true,
         unique: true
-    }
+    },
+    production : [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'product'
+        }
+    ]
 });
 
 PersonSchema.method('toJSON', function () {

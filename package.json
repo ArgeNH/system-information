@@ -23,8 +23,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.13",
-    "path": "^0.12.7",
-    "sweetalert2": "^11.1.10"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
