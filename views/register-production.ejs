@@ -5,6 +5,27 @@
                 <div class="columns">
                     <div class="column is-half is-offset-one-quarter">
                         <div class="box">
+                            <% if (price) { %>
+                                <form action="/price" method="POST">
+                                    <h2 class="title is-4">
+                                        Actualizar precio de kilo por breva
+                                    </h2>
+                                    <div class="field">
+                                        <label>Valor por kilo</label>
+                                        <div class="control">
+                                            <input class="input" type="text" name="price" required
+                                                onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="control">
+                                            <button class="button is-link">Actualizar precio</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <% } %>
+                        </div>
+                        <div class="box">
                             <h1 class="title">
                                 Registro de Produccion de breva
                             </h1>
@@ -31,36 +52,42 @@
                                     <div class="message-body">
                                         <%= production %>
                                     </div>
-                            <% } %>
+                                    <% } %>
 
-                                    <% if (register) { %>
-                                        <article class="message is-success">
-                                            <div class="message-body">
-                                                <%= register %>
-                                            </div>
-                                        </article>
+                                        <% if (register) { %>
+                                            <article class="message is-success">
+                                                <div class="message-body">
+                                                    <%= register %>
+                                                </div>
+                                            </article>
 
-                                        <form action="/add-production" method="POST">
-                                            <div class="field">
-                                                <label class="label">Kilos</label>
-                                                <div class="control">
-                                                    <input class="input" type="number" name="weight"
-                                                        placeholder="ej. 30" required>
+                                            <form action="/add-production" method="POST">
+                                                <div class="field">
+                                                    <label class="label">Kilos</label>
+                                                    <div class="control">
+                                                        <input class="input" type="number" name="weight"
+                                                            placeholder="ej. 30" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="field">
-                                                <label class="label">Fecha</label>
-                                                <div class="control">
-                                                    <input class="input" type="date" name="date" required>
+                                                <div class="field">
+                                                    <label class="label">Fecha</label>
+                                                    <div class="control">
+                                                        <input class="input" type="date" name="date" required>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="field">
-                                                <div class="control">
-                                                    <button class="button is-link">Registrar Produccion</button>
+                                                <div class="field" style="visibility: hidden;">
+                                                    <label class="label">Valor a pagar:</label>
+                                                    <div class="control">
+                                                        <input class="input" type="text" name="payment" disabled>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                        <% } %>
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <button class="button is-link">Registrar Produccion</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <% } %>
                         </div>
                     </div>
                 </div>

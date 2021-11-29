@@ -31,7 +31,8 @@
                                                 <label class="label">Cedula</label>
                                                 <div class="control">
                                                     <input class="input" type="text" placeholder="ej. 105212145"
-                                                        name="idCard">
+                                                        name="idCard"
+                                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                                                 </div>
                                             </div>
 
@@ -39,7 +40,8 @@
                                                 <label class="label">Nombres</label>
                                                 <div class="control">
                                                     <input class="input" type="text" placeholder="ej. Arge Darley"
-                                                        name="name">
+                                                        name="name"
+                                                        onkeypress="return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.charCode === 32">
                                                 </div>
                                             </div>
 
@@ -47,7 +49,8 @@
                                                 <label class="label">Apellidos</label>
                                                 <div class="control">
                                                     <input class="input" type="text" placeholder="ej. Nino Viancha"
-                                                        name="lastname">
+                                                        name="lastname"
+                                                        onkeypress="return event.charCode >= 65 && event.charCode <= 90 || event.charCode >= 97 && event.charCode <= 122 || event.charCode === 32">
                                                 </div>
                                             </div>
 

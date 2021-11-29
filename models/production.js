@@ -8,6 +8,9 @@ const ProductionSchema = new Schema({
     date: {
         type: Date,
         require: true
+    },
+    payment: {
+        type: Number
     }
 });
 

@@ -1,6 +1,9 @@
 const { response } = require('express');
 const Person = require('../models/person');
 const Production = require('../models/production');
+const { writeFileSync, readFileSync } = require('fs');
+
+let pathFile = `${__dirname}\\\price.json`;
 
 const createPerson = async (req, res = response) => {
     const { idCard } = req.body;
@@ -28,7 +31,6 @@ const createPerson = async (req, res = response) => {
 const getPerson = async (req, res = response) => {
     const { idCard } = req.body;
     let person = await Person.findOne({ idCard });
-    //localStorage.setItem('idCard', JSON.stringify(person));
     if (person) {
         //Registrado
         req.flash('product', `Registre la produccion de ${person.name} ${person.lastname} \n
@@ -37,7 +39,7 @@ const getPerson = async (req, res = response) => {
         res.redirect('/register-production');
     } else {
         // No registrado
-        req.flash('fregister', `La persona  con la cedula ${idCard} NO esta registrada, debe registrara para poder 
+        req.flash('fregister', `La persona  con la cedula ${idCard} NO esta registrada, debe registrarla para poder 
         anadir la produccion`);
         res.redirect('/register-user');
     }
@@ -49,18 +51,29 @@ const updatePerson = async (req, res = response) => {
 
 const createProduction = async (req, res = response) => {
     const idCard = req.session.idCard;
+    const data = readFileSync(pathFile);
+    const { price } = JSON.parse(data);
+    const payment = req.body.weight * price;
+    req.body.payment = payment;
+
     try {
         const production = new Production(req.body);
         const person = await Person.findOneAndUpdate({ idCard: idCard }, {
             $push: {
                 'production': production._id
             }
-        }, { new: true, useFindAndModify: true });
+        }, {
+            new: true,
+            useFindAndModify: true
+        });
 
         await production.save();
         await person.save();
 
-        req.flash('register-production', `Se ha registrado la produccion`);
+        let formatPayment = new Intl.NumberFormat().format(production.payment);
+
+        req.flash('register-production', `Se ha registrado la produccion de ${person.name} 
+        ${person.lastname}. El pago es de $${formatPayment} pesos`);
         res.redirect('/register-production');
     } catch (e) {
         console.log(e);
@@ -69,11 +82,24 @@ const createProduction = async (req, res = response) => {
             message: 'Ha ocurrido un error'
         });
     }
-}
+};
+
+const updatePrice = async (req, res) => {
+    try {
+        writeFileSync(pathFile, JSON.stringify({
+            price: req.body.price
+        }, null, 2), 'utf8');
+        console.log(`Precio Actulizado a : $${req.body.price}`);
+    } catch (e) {
+        console.log('Error al escribir el archivo', e);
+    }
+    res.redirect('/register-production');
+};
 
 module.exports = {
     createPerson,
     getPerson,
     updatePerson,
-    createProduction
+    createProduction,
+    updatePrice
 }
