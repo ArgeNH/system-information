@@ -1,0 +1,40 @@
+<%- include('./templates/header.ejs') %>
+    <%- include('./templates/navbar')%>
+
+        <div class="container">
+            <div class="columns">
+                <div class="column is-half is-offset-one-quarter">
+                    <br>
+                    <div class="box">
+                        <h1 class="title">
+                            Buscar Estadisticas para
+                        </h1>
+                        <form action="/findStats" method="POST">
+
+                            <div class="field">
+                                <label class="label">Cedula del propietario</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="idCard" required
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-link">Comprobar Persona</button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <% if (stats) { %>
+                            <article class="message is-success">
+                                <div class="message-body">
+                                    <%= stats %>
+                                </div>
+                                <% } %>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./templates/footer')%>

@@ -45,8 +45,18 @@ const getPerson = async (req, res = response) => {
     }
 };
 
-const updatePerson = async (req, res = response) => {
-
+const getPersoStats = async (req, res = response) => {
+    const { idCard } = req.body;
+    let person = await Person.findOne({ idCard });
+    if(person) {
+        req.flash('stats', `Puede buscar por las siguientes estadisticas`);
+        req.session.idCard = idCard;
+        res.redirect('view-stats');
+    } else {
+        req.flash('fregister', `La persona  con la cedula ${idCard} NO esta registrada, debe registrarla para poder 
+        anadir la produccion`);
+        res.redirect('/register-user');
+    }
 }
 
 const createProduction = async (req, res = response) => {
@@ -99,7 +109,7 @@ const updatePrice = async (req, res) => {
 module.exports = {
     createPerson,
     getPerson,
-    updatePerson,
+    getPersoStats,
     createProduction,
     updatePrice
 }
