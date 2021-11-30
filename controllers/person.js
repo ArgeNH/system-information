@@ -116,7 +116,7 @@ const statsMonth = async (req, res = response) => {
     for (let i = 0; i < resultP.length; i++) {
         let date = resultP[i].date;
         let aux = date.toString();
-        let month = aux.slice(4,7);
+        let month = aux.slice(4, 7);
         dataTable.push({
             weight: resultP[i].weight,
             pay: resultP[i].payment,
