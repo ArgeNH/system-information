@@ -113,11 +113,14 @@ const statsMonth = async (req, res = response) => {
     //console.log(JSON.parse(production));
     let resultP = await Production.find({ production });
     let dataTable = []
-    console.log(resultP.length);
     for (let i = 0; i < resultP.length; i++) {
+        let date = resultP[i].date;
+        let aux = date.toString();
+        let month = aux.slice(4,7);
         dataTable.push({
             weight: resultP[i].weight,
-            pay: resultP[i].payment
+            pay: resultP[i].payment,
+            date: month
         })
     }
     res.render('stats', { production: dataTable });
