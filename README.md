@@ -9,6 +9,12 @@ y luego para ejecutar la aplicacion
 npm start
 ```
 ---
+#### Rutas
+- `/` Pagina principal
+- `/register-user` Vista para registrar a una persona
+- `/register-production` Vista para registrar la produccion del usuario
+- `/view-stats` Vista para filtrar por estdisticas
+---
 #### Descripcion de carpetas
 - `routes` tiene el archivo `index.js` donde se especifican las rutas del aplicativo.
 - `views` tiene cada unas de las vistas necesarias para la aplicacion. Usa el motor de plantillas `EJS`.
