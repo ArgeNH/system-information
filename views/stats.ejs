@@ -1,6 +1,31 @@
 <%- include('./templates/header.ejs') %>
     <%- include('./templates/navbar')%>
     <div class="container">
-        
+        <h2>Kilos por mes</h2>
+        <canvas id="myChart" width="400" height="400"></canvas>
+                <script>
+                    var datas = JSON.parse('<%- JSON.stringify(production) %>');
+                    console.log(datas);
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: [],
+                            datasets: [{
+                                label: 'Kilos',
+                                backgroundColor: "rgba(44,142,8,0.2)",
+                                borderColor: "rgba(44,142,8,1)",
+                                borderWidth: 1,
+                                hoverBackgroundColor: "rgba(44,142,8,0.4)",
+                                hoverBorderColor: "rgba(44,142,8,1)",
+                            }]
+                        }
+                    });
+                    datas.forEach(element => {
+                        myChart.data['labels'].push(element.weight);
+                        myChart.data['datasets'][0].data.push(element.pay);
+                    });
+                    myChart.update();
+                </script>
     </div>
         <%- include('./templates/footer')%>

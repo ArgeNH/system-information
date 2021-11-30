@@ -110,8 +110,17 @@ const statsMonth = async (req, res = response) => {
     const idCard = req.session.idCard;
     let result = await Person.findOne({ idCard });
     let { production } = await result;
-    console.log(production);
-    res.render('stats', { production: production });
+    //console.log(JSON.parse(production));
+    let resultP = await Production.find({ production });
+    let dataTable = []
+    console.log(resultP.length);
+    for (let i = 0; i < resultP.length; i++) {
+        dataTable.push({
+            weight: resultP[i].weight,
+            pay: resultP[i].payment
+        })
+    }
+    res.render('stats', { production: dataTable });
 }
 
 module.exports = {
