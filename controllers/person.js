@@ -48,7 +48,7 @@ const getPerson = async (req, res = response) => {
 const getPersoStats = async (req, res = response) => {
     const { idCard } = req.body;
     let person = await Person.findOne({ idCard });
-    if(person) {
+    if (person) {
         req.flash('stats', `Puede buscar por las siguientes estadisticas`);
         req.session.idCard = idCard;
         res.redirect('view-stats');
@@ -94,7 +94,7 @@ const createProduction = async (req, res = response) => {
     }
 };
 
-const updatePrice = async (req, res) => {
+const updatePrice = async (req, res = response) => {
     try {
         writeFileSync(pathFile, JSON.stringify({
             price: req.body.price
@@ -106,10 +106,19 @@ const updatePrice = async (req, res) => {
     res.redirect('/register-production');
 };
 
+const statsMonth = async (req, res = response) => {
+    const idCard = req.session.idCard;
+    let result = await Person.findOne({ idCard });
+    let { production } = await result;
+    console.log(production);
+    res.render('stats', { production: production });
+}
+
 module.exports = {
     createPerson,
     getPerson,
     getPersoStats,
     createProduction,
-    updatePrice
+    updatePrice,
+    statsMonth
 }

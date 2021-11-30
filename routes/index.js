@@ -1,11 +1,11 @@
 const { Router } = require('express');
-const { route } = require('express/lib/application');
 const {
     createPerson,
     getPerson,
     getPersoStats,
     createProduction,
-    updatePrice
+    updatePrice,
+    statsMonth
 } = require('../controllers/person');
 
 const router = Router();
@@ -44,5 +44,11 @@ router.post('/add-production', createProduction); //Crea una produccion
 router.post('/price', updatePrice); //Actualiza precio
 
 router.post('/findStats', getPersoStats);
+
+router.get('/per-month', statsMonth);
+
+router.get('/per-year', statsMonth);
+
+router.get('/per-person', statsMonth);
 
 module.exports = router;
